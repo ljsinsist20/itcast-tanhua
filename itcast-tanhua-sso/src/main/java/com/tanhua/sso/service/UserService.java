@@ -9,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+//import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,8 +42,8 @@ public class UserService {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    @Autowired
-    private RocketMQTemplate rocketMQTemplate;
+//    @Autowired
+//    private RocketMQTemplate rocketMQTemplate;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -86,7 +87,7 @@ public class UserService {
             Map<String, Object> msg = new HashMap<>();
             msg.put("userId", selectUser.getId());
             msg.put("date", new Date());
-            this.rocketMQTemplate.convertAndSend("tanhua-sso-login", msg);
+//            this.rocketMQTemplate.convertAndSend("tanhua-sso-login", msg);
         } catch (Exception e) {
             e.printStackTrace();
         }
