@@ -24,6 +24,7 @@ public class SmsService {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
+    @Autowired
     private RedisTemplate<String, String> redisTemplate;
     /**
      *  测试
