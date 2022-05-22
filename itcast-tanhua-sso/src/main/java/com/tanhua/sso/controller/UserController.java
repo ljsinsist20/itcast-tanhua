@@ -36,7 +36,7 @@ public class UserController {
             Map<String, Object> result = new HashMap<>(2);
             if (StringUtils.isNotEmpty(token)) {
                 String[] ss = StringUtils.split(token, "|");
-                String isNew = ss[0];
+                Boolean isNew = Boolean.valueOf(ss[0]);
                 String tokenStr = ss[1];
 
                 result.put("isNew", isNew);
