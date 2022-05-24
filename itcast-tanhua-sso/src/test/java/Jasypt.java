@@ -9,6 +9,6 @@ public class Jasypt {
     public static void main(String[] args) {
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword("666");
-        System.out.println(encryptor.encrypt("YKtQ3DBdWm2vNPNCnFvvfy0MPBxlb5"));
+        System.out.println(encryptor.encrypt(""));
     }
 }
