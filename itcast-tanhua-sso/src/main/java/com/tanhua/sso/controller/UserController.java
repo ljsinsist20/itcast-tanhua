@@ -1,15 +1,13 @@
 package com.tanhua.sso.controller;
 
+import com.tanhua.sso.pojo.User;
 import com.tanhua.sso.service.UserService;
 import com.tanhua.sso.vo.ErrorResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,5 +47,10 @@ public class UserController {
         // 登录失败，验证码错误
         ErrorResult errorResult = ErrorResult.builder().errCode("000000").errMessage("验证码错误").build();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResult);
+    }
+
+    @GetMapping("{token}")
+    public User queryUserByToken(@PathVariable("token") String token) {
+        return this.userService.queryUserByToken(token);
     }
 }

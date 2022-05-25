@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfo extends BasePojo{
-    private Long id;
+    private Long userId;
     private String tags; //用户标签：多个用逗号分隔
     private SexEnum sex; //性别
     private Integer age; //年龄
@@ -26,4 +26,6 @@ public class UserInfo extends BasePojo{
     private String industry; //行业
     private String income; //收入
     private String marriage; //婚姻状态
+
+    private String nickName;//昵称
 }

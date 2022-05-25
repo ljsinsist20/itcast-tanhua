@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -43,10 +44,18 @@ public class UserService {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
 //    @Autowired
+//    TODO
 //    private RocketMQTemplate rocketMQTemplate;
 
     @Value("${jwt.secret}")
     private String secret;
+
+    /**
+     * 登录
+     * @param mobile
+     * @param code
+     * @return
+     */
     public String login(String mobile, String code) {
         //是否为新用户
         Boolean isNew = false;
@@ -87,11 +96,32 @@ public class UserService {
             Map<String, Object> msg = new HashMap<>();
             msg.put("userId", selectUser.getId());
             msg.put("date", new Date());
+            //    TODO
 //            this.rocketMQTemplate.convertAndSend("tanhua-sso-login", msg);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return isNew + "|" + token;
     }
-}
 
+    /**
+     * 获取登录用户信息
+     * @param token
+     * @return
+     */
+    public User queryUserByToken(String token) {
+        String redisTokenKey = "TOKEN_" + token;
+        try {
+            String cacheData = redisTemplate.opsForValue().get(redisTokenKey);
+            if (StringUtils.isEmpty(cacheData)) {
+                return null;
+            }
+            //刷新时间
+            redisTemplate.expire(redisTokenKey, 1, TimeUnit.HOURS);
+            return MAPPER.readValue(cacheData, User.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}

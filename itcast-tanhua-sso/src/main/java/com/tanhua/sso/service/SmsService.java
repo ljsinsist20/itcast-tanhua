@@ -66,6 +66,7 @@ public class SmsService {
             this.redisTemplate.opsForValue().set(rediskey, code, Duration.ofMinutes(2));
             return result;
         } catch (Exception e) {
+            e.printStackTrace();
             result.put("code", 4);
             result.put("msg", "发送验证码出现异常");
             return result;
