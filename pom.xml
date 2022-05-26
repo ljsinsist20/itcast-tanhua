@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>itcast-tanhua-sso</module>
+        <module>itcast-tanhua-dubbo</module>
     </modules>
 
     <parent>
